@@ -1,3 +1,4 @@
+
 import { expect, test } from '@playwright/test';
 import BasePage from '../pages/BasePage';
 import ButtonsPage from '../pages/ButtonsPage';
@@ -8,12 +9,14 @@ import { doubleClickMessageText, rightClickMessageText, clickMeText } from '../t
 test.beforeEach('precondition', async ({ page }) => {
     const basePage = new BasePage(page);
     await basePage.openBasePage();
+
 });
 
 // Task 1:
 test.describe(async () => {
 
     test('Get element by locator', async ({ page }) => {
+
         const basePage = new BasePage(page);
         const elementsPage = new ElementsPage(page);
         await elementsPage.countCategoryElements();
