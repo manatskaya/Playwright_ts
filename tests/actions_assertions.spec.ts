@@ -1,27 +1,26 @@
-import { expect, Locator, test } from '@playwright/test';
+
+import { expect, test } from '@playwright/test';
+import BasePage from '../pages/BasePage';
+import ButtonsPage from '../pages/ButtonsPage';
+import ElementsPage from '../pages/ElementsPage';
+import { expectedCategoryArray } from '../test-data/basePage';
+import { doubleClickMessageText, rightClickMessageText, clickMeText } from '../test-data/buttonsPage';
 
 test.beforeEach('precondition', async ({ page }) => {
-    await page.goto('/');
+    const basePage = new BasePage(page);
+    await basePage.openBasePage();
+
 });
 
 // Task 1:
 test.describe(async () => {
 
     test('Get element by locator', async ({ page }) => {
-        const expectedCategoryArray: string[] = [
-            "Elements",
-            "Forms",
-            "Alerts, Frame & Windows",
-            "Widgets",
-            "Interactions",
-            "Book Store Application"
-        ];
-        const actualCategoryArray: string[] = [];
-        const categoryCard: number = await page.locator('.card.mt-4.top-card').count();
-        for (let index = 0; index < categoryCard; index++) {
-           let elementCategoryCards: string = await page.locator('.card.mt-4.top-card').nth(index).innerText();
-           actualCategoryArray.push(elementCategoryCards); 
-        }
+
+        const basePage = new BasePage(page);
+        const elementsPage = new ElementsPage(page);
+        await elementsPage.countCategoryElements();
+        const actualCategoryArray = await elementsPage.getCategoryCards();
         expect(actualCategoryArray).toEqual(expectedCategoryArray);
     });
 });
@@ -30,32 +29,31 @@ test.describe(async () => {
 test.describe( async () => {
 
     test('Verify Buttons subcategory opens via sidebar', async ({ page }) => {
-        const elementsCategory: Locator = page.getByRole('heading', { name: 'Elements'});
-        await elementsCategory.click();
+        const buttonsPage = new ButtonsPage(page);
+        await buttonsPage.clickElementsCategory();
         await expect(page).toHaveURL('/elements');
-        const elementInMenu: Locator = page.getByRole('list').getByText('Buttons');
-        await elementInMenu.click();
+        await buttonsPage.clickElementInMenu();
         await expect(page).toHaveURL('/buttons');
     });
     test('Verify DoubleClick btn is clickable and correct text is shown', async ({ page }) => {
-        await page.goto('/buttons', { waitUntil: 'load'} );
+        const buttonsPage = new ButtonsPage(page);
+        await buttonsPage.openButtonsPage();
         await expect(page).toHaveURL('/buttons');
-        const doubleClickBtn = page.locator('#doubleClickBtn');
-        await doubleClickBtn.dblclick();
-        await expect(page.locator('#doubleClickMessage')).toContainText('You have done a double click');
+        await buttonsPage.clickDoubleClickBtn();
+        await expect(buttonsPage.doubleClickMessage).toContainText(doubleClickMessageText);
     });
     test('Verify RightClick btn is clickable and correct text is shown', async ({ page }) => {
-        await page.goto('/buttons', { waitUntil: 'load'} );
+        const buttonsPage = new ButtonsPage(page);
+        await buttonsPage.openButtonsPage();
         await expect(page).toHaveURL('/buttons');
-        const rightClickBtn: Locator = page.locator('#rightClickBtn');
-        await rightClickBtn.click({ button : 'right'});
-        await expect(page.locator('#rightClickMessage')).toContainText('You have done a right click');
+        await buttonsPage.clickRightBtn();
+        await expect(buttonsPage.rightClickMessage).toContainText(rightClickMessageText);
     });
     test('Verify ClickMe btn is clickable and correct text is shown', async ({ page }) => {
-        await page.goto('/buttons', { waitUntil: 'load'} );
+        const buttonsPage = new ButtonsPage(page);
+        await buttonsPage.openButtonsPage();
         await expect(page).toHaveURL('/buttons');
-        const  clickMeBtn: Locator = page.getByRole('button', { name: 'Click Me', exact: true });
-        await clickMeBtn.click();
-        await expect(page.locator('#dynamicClickMessage')).toContainText('You have done a dynamic click');
+        await buttonsPage.clickMeBtnClick();
+        await expect(buttonsPage.clickMeMessage).toContainText(clickMeText);
     });
 });
