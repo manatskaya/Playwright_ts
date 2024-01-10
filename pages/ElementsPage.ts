@@ -14,7 +14,6 @@ export default class ElementsPage extends BasePage {
         this.elementsCategoryCards = this.page.locator('.card.mt-4.top-card');
     };
     async getCategoryCards(): Promise<string[]> {
-        const actualCategoryArray = await this.page.locator('.card.mt-4.top-card').allInnerTexts();
-        return actualCategoryArray;
+        return await this.page.locator('.card.mt-4.top-card').allInnerTexts();
     };
 };
