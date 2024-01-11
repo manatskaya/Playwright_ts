@@ -12,7 +12,7 @@ export default class BasePage {
     async countCategoryElements(): Promise<void> {
         this.countCategoryCard = await this.categoryCard.count();
     };
-    async openBasePage(): Promise<void> {
-        await this.page.goto('/');
+    async openBasePage(baseURL) : Promise<void> {
+        await this.page.goto(baseURL);
     }
 };

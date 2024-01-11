@@ -8,8 +8,7 @@ import { doubleClickMessageText, rightClickMessageText, clickMeText } from '../t
 
 test.beforeEach('precondition', async ({ page }) => {
     const basePage = new BasePage(page);
-    await basePage.openBasePage();
-
+    await basePage.openBasePage(process.env.BASE_URL);
 });
 
 // Task 1:

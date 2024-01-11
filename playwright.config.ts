@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import { on } from 'events';
+import { config } from './config/config';
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 /**
  * Read environment variables from file.
@@ -21,13 +24,13 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html',{ open:'on-failure' }]],
+  reporter: [['blob'], ['list'], ['html',{ open:'on-failure' }]],
   globalSetup: 'globalSetup.ts',
   globalTeardown: 'globalTeardown.ts',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://demoqa.com/',
+    baseURL: config.baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
