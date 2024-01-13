@@ -1,12 +1,9 @@
-import { expect, test } from '@playwright/test';
-import { config } from '../config/config';
-import RegistrationPage from '../pages/RegistrationPage';
+import { test } from "../src/fixtures/base_fixtures";
 import { creds } from '../test-data/registrationPage';
+
 test.describe(async () => {
 
-    test('Register new user', async ({ page }) => {
-        const registrationPage = new RegistrationPage(page);
-        await registrationPage.openRegistrationPage();
+    test('Register new user', async ({ registrationPage }) => {
         await registrationPage.fillInRegistrationForm(creds);
     });
 });

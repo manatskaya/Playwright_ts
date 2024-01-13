@@ -23,17 +23,17 @@ export default class LoginPage extends BasePage {
         await expect(this.userNameInput).toHaveValue(userName);
         await this.passwordInput.fill(password);
         await expect(this.passwordInput).toHaveValue(password);
-    }
+    };
     async clickBookStoreApplication(): Promise<void> {
         await this.openBasePage(process.env.BASE_URL);
         await this.bookStoreCategory.click();
-    }
+    };
     async clickLoginSideBar(): Promise<void> {
         await this.clickBookStoreApplication();
         await this.loginLinkSideBar.click();
-    }
+    };
     async clickLoginBtn(): Promise<void> {
         await this.loginBtn.click();
         await this.page.waitForURL('**/profile');
-    }
+    };
 };

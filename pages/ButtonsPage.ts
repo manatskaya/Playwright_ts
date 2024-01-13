@@ -11,7 +11,6 @@ export default class ButtonsPage {
     clickMeBtn: Locator;
     clickMeMessage: Locator;
 
-
     constructor (page: Page) {
         this.page = page;
         this.elementsCategory = this.page.getByRole('heading', { name: 'Elements'});
