@@ -1,10 +1,11 @@
-import { test as base} from '@playwright/test';
+import { APIRequestContext, request, test as base} from '@playwright/test';
 import BasePage from '../../pages/BasePage';
 import BookStorePage from '../../pages/BookStorePage';
 import ButtonsPage from '../../pages/ButtonsPage';
 import ElementsPage from '../../pages/ElementsPage';
 import LoginPage from '../../pages/LoginPage';
 import RegistrationPage from '../../pages/RegistrationPage';
+import { storageStatePath } from '../links/path';
 
 type MyFixture = {
     expectedCategoryArray: string[],
@@ -14,6 +15,7 @@ type MyFixture = {
     basePage: BasePage;
     registrationPage: RegistrationPage;
     bookStorePage: BookStorePage;
+    userApiRequest: APIRequestContext;
 }
 
 const test = base.extend <MyFixture>  ({
@@ -54,7 +56,12 @@ const test = base.extend <MyFixture>  ({
         await bookStorePage.selectAvailableBook();
         await use(bookStorePage);
         await bookStorePage.deleteAddedBook();
+    },
+    userApiRequest: async ({ }, use) => {
+        const newContext = await request.newContext({
+        storageState: storageStatePath
+        });
+    await use(newContext)
     }
 });
-
-export { test}
+export { test }
