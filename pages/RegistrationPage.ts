@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { ICredentials } from "../utils/credentials.interface";
 
 export default class RegistrationPage {
     readonly page: Page;
@@ -16,7 +17,7 @@ export default class RegistrationPage {
     };
     async openRegistrationPage(): Promise<void> {
         await this.page.goto('/register');
-    }
+    };
     async fillInRegistrationForm(credentials: ICredentials) {
         await this.firstNameRegistration.fill(credentials.firstName);
         await this.lastNameRegistration.fill(credentials.lastName);

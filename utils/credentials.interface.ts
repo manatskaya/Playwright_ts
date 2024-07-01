@@ -1,4 +1,4 @@
-interface ICredentials {
+export interface ICredentials {
     password:string,
     userName:string,
     firstName:string,

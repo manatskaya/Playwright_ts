@@ -1,0 +1,1 @@
+export const storageStatePath = 'src/state/user_state.json'

@@ -4,23 +4,22 @@ export default class ButtonsPage {
     readonly page: Page;
     readonly elementsCategory: Locator;
     readonly elementInMenu: Locator;
-    readonly doubleClickBtn: Locator;
+    readonly doubleClickButton: Locator;
     doubleClickMessage: Locator;
-    rightClickBtn: Locator;
+    rightClickButton: Locator;
     rightClickMessage: Locator;
-    clickMeBtn: Locator;
+    clickMeButton: Locator;
     clickMeMessage: Locator;
-
 
     constructor (page: Page) {
         this.page = page;
         this.elementsCategory = this.page.getByRole('heading', { name: 'Elements'});
         this.elementInMenu = this.page.getByRole('list').getByText('Buttons');
-        this.doubleClickBtn = this.page.locator('#doubleClickBtn');
+        this.doubleClickButton = this.page.locator('#doubleClickBtn');
         this.doubleClickMessage = this.page.locator('#doubleClickMessage');
-        this.rightClickBtn = this.page.locator('#rightClickBtn');
+        this.rightClickButton = this.page.locator('#rightClickBtn');
         this.rightClickMessage = this.page.locator('#rightClickMessage');
-        this.clickMeBtn = this.page.getByRole('button', { name: 'Click Me', exact: true });
+        this.clickMeButton = this.page.getByRole('button', { name: 'Click Me', exact: true });
         this.clickMeMessage = this.page.locator('#dynamicClickMessage');
     };
     async clickElementsCategory(): Promise<void> {
@@ -33,12 +32,12 @@ export default class ButtonsPage {
         await this.page.goto('/buttons', { waitUntil: 'load'} );
     };
     async clickDoubleClickBtn(): Promise<void> {
-        await this.doubleClickBtn.dblclick();
+        await this.doubleClickButton.dblclick();
     };
     async clickRightBtn(): Promise<void> {
-        await this.rightClickBtn.click({ button : 'right'});
+        await this.rightClickButton.click({ button : 'right'});
     };
     async clickMeBtnClick(): Promise<void> {
-       await this.clickMeBtn.click(); 
+       await this.clickMeButton.click(); 
     };
 };
