@@ -5,7 +5,7 @@ export default class LoginPage extends BasePage {
     readonly page: Page;
     userNameInput: Locator;
     passwordInput: Locator;
-    loginBtn: Locator;
+    loginButton: Locator;
     bookStoreCategory: Locator;
     loginLinkSideBar: Locator;
 
@@ -14,7 +14,7 @@ export default class LoginPage extends BasePage {
         this.page = page;
         this.userNameInput = this.page.locator('#userName');
         this.passwordInput = this.page.locator('#password');
-        this.loginBtn = this.page.locator('#login');
+        this.loginButton = this.page.locator('#login');
         this.bookStoreCategory = this.page.getByRole('heading', { name: 'Book Store Application'});
         this.loginLinkSideBar = this.page.getByRole('list').getByText('Login');
     };
@@ -33,7 +33,7 @@ export default class LoginPage extends BasePage {
         await this.loginLinkSideBar.click();
     };
     async clickLoginBtn(): Promise<void> {
-        await this.loginBtn.click();
+        await this.loginButton.click();
         await this.page.waitForURL('**/profile');
     };
 };

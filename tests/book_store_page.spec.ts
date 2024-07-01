@@ -1,13 +1,10 @@
 import { expect } from '@playwright/test';
 import { test } from '../src/fixtures/base_fixtures';
-import { userName, password } from '../test-data/LoginPage';
 
 test.describe(async () => {
 
     test('Add book to My account', async ({login, bookStorePage}) => {
-        await login.fillInLoginForm(userName, password);
-        await login.clickLoginBtn();
-        await expect (login.page).toHaveURL('/profile');
+        expect(login.page).toHaveURL('/profile');
         await bookStorePage.clickAddToCollectionBtn();
         await bookStorePage.clickProfileInMenuBar();
         await bookStorePage.enterBookTitleInSearchBox();

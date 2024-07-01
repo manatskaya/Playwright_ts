@@ -5,9 +5,10 @@ import ButtonsPage from '../../pages/ButtonsPage';
 import ElementsPage from '../../pages/ElementsPage';
 import LoginPage from '../../pages/LoginPage';
 import RegistrationPage from '../../pages/RegistrationPage';
+import { password, userName } from '../../test-data/LoginPage';
 import { storageStatePath } from '../links/path';
 
-type MyFixture = {
+type TMyFixture = {
     expectedCategoryArray: string[],
     login: LoginPage;
     elementsPage: ElementsPage;
@@ -18,7 +19,7 @@ type MyFixture = {
     userApiRequest: APIRequestContext;
 }
 
-const test = base.extend <MyFixture>  ({
+const test = base.extend <TMyFixture>  ({
     expectedCategoryArray: [
         "Elements",
         "Forms",
@@ -31,6 +32,8 @@ const test = base.extend <MyFixture>  ({
         const login = new LoginPage(page);
         await login.clickBookStoreApplication();
         await login.clickLoginSideBar();
+        await login.fillInLoginForm(userName, password);
+        await login.clickLoginBtn();
         await use(login);
         },
     elementsPage: async({page}, use) => {

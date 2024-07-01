@@ -10,7 +10,7 @@ export default class BookStorePage extends LoginPage {
     profileBookSearchBox: Locator;
     lastVisitedBookTitle: string;
     deleteButton: Locator;
-    okBtnOnModalDialog: Locator;
+    okButtonOnModalDialog: Locator;
     
     constructor(page: Page) {
         super(page);
@@ -21,7 +21,7 @@ export default class BookStorePage extends LoginPage {
         this.profileButton = this.page.getByRole('list').getByText('Profile');
         this.profileBookSearchBox = this.page.locator('#searchBox');
         this.deleteButton = this.page.locator('#delete-record-undefined');
-        this.okBtnOnModalDialog = this.page.locator('#closeSmallModal-ok');
+        this.okButtonOnModalDialog = this.page.locator('#closeSmallModal-ok');
         
         this.page.on('dialog', dialog => dialog.accept());
     };
@@ -44,6 +44,6 @@ export default class BookStorePage extends LoginPage {
     async deleteAddedBook() {
         await this.page.goto('/profile');
         await this.deleteButton.click();
-        await this.okBtnOnModalDialog.click();
+        await this.okButtonOnModalDialog.click();
     };
 };
