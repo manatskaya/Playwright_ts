@@ -6,6 +6,7 @@ export default class LoginPage extends BasePage {
     userNameInput: Locator;
     passwordInput: Locator;
     loginButton: Locator;
+
     bookStoreCategory: Locator;
     loginLinkSideBar: Locator;
 
